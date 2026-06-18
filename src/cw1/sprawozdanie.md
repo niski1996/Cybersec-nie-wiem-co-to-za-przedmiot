@@ -57,7 +57,7 @@ Następnie uruchomiono plik wykonywalny i potwierdzono poprawne działanie progr
 Hello World!
 ```
 
-Zrzut ekranu do wykonania: `resources/01-kompilacja.png`.
+![Kompilacja i uruchomienie programu](resources/original_output.png)
 
 ### 3. Analiza binarki
 Do analizy pliku wykonywalnego użyto narzędzia hex/byte view. W binarce zlokalizowano napis `Hello World!` na offsecie `0x2004`.
@@ -68,7 +68,7 @@ Podgląd fragmentu pliku przed modyfikacją:
 00002000: 01 00 02 00 48 65 6c 6c 6f 20 57 6f 72 6c 64 21  ....Hello World!
 ```
 
-Zrzut ekranu do wykonania: `resources/02-hex-przed.png`.
+![Podgląd binarki przed modyfikacją](resources/ghex_edition.png)
 
 ### 4. Modyfikacja binarna
 Przygotowano kopię pliku wykonywalnego i zmieniono ciąg znaków `Hello World!` na `Hello User`, dopisując dwa bajty zerowe, aby zachować spójny układ danych w pliku.
@@ -85,9 +85,7 @@ Po uruchomieniu zmodyfikowanego programu otrzymano wynik:
 Hello User
 ```
 
-Zrzuty ekranu do wykonania:
-- `resources/03-hex-po.png`
-- `resources/04-uruchomienie-po.png`
+![Podgląd binarki po modyfikacji](resources/modified.png)
 
 ## Wyniki
 - Oryginalny program: `Hello World!`
