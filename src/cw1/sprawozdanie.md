@@ -4,9 +4,8 @@
 - Przedmiot: IO
 - Ćwiczenie: CW1
 - Temat: analiza i modyfikacja pliku wykonywalnego w hex edytorze
-- Grupa: _uzupełnij_
-- Członkowie grupy: _uzupełnij_
-- Data wykonania: _uzupełnij_
+- Członkowie grupy: Bojda Dominika, Jarząb Julia, Ziobro Karol, Smutek Mirosław
+- Data wykonania: 12.06.2026
 
 ## Cel ćwiczenia
 Celem ćwiczenia jest przygotowanie programu w C/C++, który wyświetla napis `Hello World!`, skompilowanie go, analiza otrzymanego pliku wykonywalnego oraz ręczna zmiana zawartości binarnej tak, aby zmodyfikowany program wyświetlał napis `Hello User`.
@@ -51,7 +50,7 @@ Program skompilowano poleceniem:
 gcc hello.c -o hello
 ```
 
-Następnie uruchomiono plik wykonywalny i potwierdzono poprawne działanie programu. Wynik działania był następujący:
+Następnie uruchomiono plik wykonywalny i potwierdzono poprawne działanie programu. Program działał poprawie i wyświetlił nastepujacy tekst: 
 
 ```text
 Hello World!
@@ -59,8 +58,8 @@ Hello World!
 
 ![Kompilacja i uruchomienie programu](resources/original_output.png)
 
-### 3. Analiza binarki
-Do analizy pliku wykonywalnego użyto narzędzia hex/byte view. W binarce zlokalizowano napis `Hello World!` na offsecie `0x2004`.
+### 3. Analiza skompilowanego programmu
+Do analizy pliku wykonywalnego użyto narzędzia hex/byte view. W pliku zlokalizowano napis `Hello World!` na offsecie `0x2004`.
 
 Podgląd fragmentu pliku przed modyfikacją:
 
@@ -73,7 +72,10 @@ Podgląd fragmentu pliku przed modyfikacją:
 ### 4. Modyfikacja binarna
 Przygotowano kopię pliku wykonywalnego i zmieniono ciąg znaków `Hello World!` na `Hello User`, dopisując dwa bajty zerowe, aby zachować spójny układ danych w pliku.
 
-Po modyfikacji fragment binarki wyglądał następująco:
+W języku C bajty zerowe traktowane są przez funkcje biblioteki C jako końce łańcucha znakow dzięki temu mamy pewnosć że funckja wyświetlajaca na ekranie
+nie wyświetli kolejnych bajtów w pamieci co mogło by suktkować błędem który zakończy działanie programu. 
+
+Po modyfikacji fragment programu zawierający wyświetlany ciag znaków wyglądał następująco:
 
 ```text
 00002000: 01 00 02 00 48 65 6c 6c 6f 20 55 73 65 72 00 00  ....Hello User..
@@ -92,7 +94,19 @@ Hello User
 - Zmodyfikowany program: `Hello User`
 
 ## Wnioski
-Analiza pokazała, że prosty komunikat tekstowy w programie może zostać odnaleziony i zmieniony bez rekompilacji, bezpośrednio w pliku wykonywalnym. W praktyce oznacza to, że nawet niewielka binarna modyfikacja może zmienić zachowanie programu, o ile tekst i układ danych pozostają spójne.
+Analiza pokazała, że prosty komunikat tekstowy w programie może zostać odnaleziony, odczytany i zmieniony bez rekompilacji, bezpośrednio w pliku wykonywalnym. W praktyce oznacza to, że nawet niewielka binarna modyfikacja może zmienić zachowanie programu, o ile tekst i układ danych pozostają spójne.
+
+Jest to szczególnie ważne w przypadku gdy nasz program korzysta z szeroko pojętych sekretów np. Klucze API, Hasła, Tokeny uwierzytelniające. 
+Tego typu wartości nigdy nie powinny zajdować się bezpośrendnio w skompilowanej aplikacji jak i również w kodzie źródłowym. 
+Sekrety powinny być dostarczne do aplikacji po jej uruchomieniu (mechanizmy typu docker secrets lub konto usługi mające dostęp do sejfu przez API)
+
+Atakujacy mający kontrolę nad plikiem wykonywalnym jest w stanie równierz przekierować działanie programu w dowolny sposób który moze nie być dla nas oczywisty np
+przez zostawienie jakiegoś backdora ktróy otwiera się tylko w wpyadku gdy oppowiednie zapytanie zostanie przesłane do naszej aplikacji.
+
+Istnieją sposoby ochrony skompilowanych programów które zapobiegają zmianom wartości i zachowaniem nie zmienieonego biegu programu np. 
+- podpisywanie hashy programów,
+- szyfrowanie odpowiednyich zmiennych,
+- ustawienie odpowiednich folderów jako read only 
 
 ## Załączniki
 - Kod źródłowy programu
