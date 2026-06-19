@@ -4,9 +4,8 @@
 - Przedmiot: IO
 - Ćwiczenie: CW2
 - Temat: analiza programu z ukrytym hasłem i tekstem
-- Grupa: _uzupełnij_
-- Członkowie grupy: _uzupełnij_
-- Data wykonania: _uzupełnij_
+- Członkowie grupy: Bojda Dominika, Jarząb Julia, Ziobro Karol, Smutek Mirosław
+- Data wykonania: 12.06.2026
 
 ## Cel ćwiczenia
 Celem ćwiczenia było przygotowanie programu w języku C/C++, który po podaniu poprawnego hasła wyświetla ukryty napis. Program został zapisany w taki sposób, aby hasło oraz tekst nie były łatwe do odczytania bezpośrednio w hex edytorze. Następnie przeprowadzono analizę binarki, odczytano sposób działania zabezpieczenia i zmodyfikowano plik wykonywalny tak, aby ukryty tekst wyświetlał się bez konieczności podawania poprawnego hasła.
