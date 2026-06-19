@@ -48,8 +48,8 @@ static void xor_decode(unsigned char *buffer, size_t length, unsigned char seed)
 
 int main(void) {
     const unsigned char seed = 0x4D;
-    unsigned char password[] = { 0x3E, 0x3B, 0x04, 0xF2, 0xF4, 0xD6, 0xB3 };
-    unsigned char message[] = { 0x18, 0x35, 0x1D, 0xF9, 0xE5, 0xDB, 0x93, 0xB0, 0xB0, 0x8D, 0x84, 0x7C, 0x19 };
+    unsigned char password[] = { 0x3E, 0x3B, 0x04, 0xF2, 0xF4, 0xD6, 0xB3 }; // sekret
+    unsigned char message[] = { 0x18, 0x35, 0x1D, 0xF9, 0xE5, 0xDB, 0x93, 0xB0, 0xB0, 0x8D, 0x84, 0x7C, 0x19 }; //Ukryty teskt
     char input[64];
 
     printf("Podaj haslo: ");
@@ -73,6 +73,9 @@ int main(void) {
 
 Plik źródłowy: [cw2.c](cw2.c)
 
+Program ten zawiera w sobie skeret i wiadomosć które zostały ukryte za pomocą prostego szyfru XOR z wartością 0x4D
+Program ten korzysta z symetrycznosci syszfru XOR aby sprawdzić czy zasyfrowane wejscie jest takie samo jak przechwoywane zaszyfrowane hasło. 
+
 ### 2. Kompilacja
 Program można skompilować poleceniem:
 
@@ -88,6 +91,8 @@ Przykładowy wynik działania programu przedstawia [working_example.png](resourc
 
 ### 3. Analiza binarki
 Do analizy pliku wykonywalnego można użyć hex edytora, debuggera lub deasemblatora. W tej wersji programu dane nie są zapisane jako czytelne napisy, ponieważ zostały zakodowane zależnym od indeksu XOR-em, co utrudnia ich bezpośrednie odczytanie i eliminuje prosty stały klucz widoczny w binarce.
+
+Dodatkowo dzięki temu większosć znaków wypada poza standardowy zakres ASCII więc narzędzia typu strings nie wyświetlą potencjalnych fragmentów zawierających nasz ukryty teskt 
 
 Pierwszym krokiem było sprawdzenie zawartości binarki w widoku heksadecymalnym. Widać, że dane nie występują w postaci jawnego napisu, tylko jako zaszyfrowane bajty, co potwierdza, że prosty podgląd pliku nie wystarcza do odczytania hasła.
 
@@ -127,6 +132,10 @@ Po uruchomieniu zmodyfikowanego programu otrzymano ukryty tekst bez podawania po
 Najważniejszy wniosek jest taki, że zabezpieczenie oparte wyłącznie na ukrywaniu stałych w pliku wykonywalnym nie stanowi realnej ochrony. Po znalezieniu miejsca porównania hasła można było albo podejrzeć dane w pamięci, albo ominąć warunek i wymusić wykonanie właściwej gałęzi programu.
 
 W praktyce oznacza to, że o bezpieczeństwie programu decyduje logika i kontrola dostępu, a nie samo „schowanie” tekstu w binarce.
+
+Możlwiym rozwiązaniem tego problemu było by zapytanie użytkownika o sam klucz (warotść 0x4D) jednak będzie to podatne na ataki Brute force - Maksymalnie 255 kluczy co dla dzisiejszych kompterów jest do sprawdzenia w kilkadziesiat instrukcji procesora. 
+
+Oczywisice zastosowanie lepszego mechanizmu szyfrowania takiego jak AES i poproszenie użytkownika o klucz deszyfrujący jest zdecydowanie bardziej zalecaną metodą.
 
 ## Załączniki
 - Kod źródłowy programu
