@@ -72,8 +72,8 @@ Podgląd fragmentu pliku przed modyfikacją:
 ### 4. Modyfikacja binarna
 Przygotowano kopię pliku wykonywalnego i zmieniono ciąg znaków `Hello World!` na `Hello User`, dopisując dwa bajty zerowe, aby zachować spójny układ danych w pliku.
 
-W języku C bajty zerowe traktowane są przez funkcje biblioteki C jako końce łańcucha znakow dzięki temu mamy pewnosć że funckja wyświetlajaca na ekranie
-nie wyświetli kolejnych bajtów w pamieci co mogło by suktkować błędem który zakończy działanie programu. 
+W języku C bajty zerowe traktowane są przez funkcje biblioteki C jako końce łańcucha znakow dzięki temu mamy pewnosć że funkcja wyświetlająca na ekranie
+nie wyświetli kolejnych bajtów w pamięci co mogło by suktkować błędem który zakończy działanie programu. 
 
 Po modyfikacji fragment programu zawierający wyświetlany ciag znaków wyglądał następująco:
 
@@ -106,7 +106,7 @@ przez zostawienie jakiegoś backdora ktróy otwiera się tylko w wpyadku gdy opp
 Istnieją sposoby ochrony skompilowanych programów które zapobiegają zmianom wartości i zachowaniem nie zmienieonego biegu programu np. 
 - podpisywanie hashy programów,
 - szyfrowanie odpowiednyich zmiennych,
-- ustawienie odpowiednich folderów jako read only 
+- ustawienie odpowiednich folderów jako read only. 
 
 ## Załączniki
 - Kod źródłowy programu
