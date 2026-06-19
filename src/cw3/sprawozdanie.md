@@ -4,9 +4,8 @@
 - Przedmiot: IO
 - Ćwiczenie: CW3
 - Temat: analiza programu Java z ukrytym hasłem i tekstem
-- Grupa: _uzupełnij_
-- Członkowie grupy: _uzupełnij_
-- Data wykonania: _uzupełnij_
+- Członkowie grupy: Bojda Dominika, Jarząb Julia, Ziobro Karol, Smutek Mirosław
+- Data wykonania: 12.06.2026
 
 ## Cel ćwiczenia
 Celem ćwiczenia było przygotowanie programu w Javie, który po podaniu poprawnego hasła wyświetla ukryty napis. Program został zapisany tak, aby hasło oraz tekst nie były łatwe do odczytania bezpośrednio w pliku źródłowym i w skompilowanym pliku klasy. Następnie przeprowadzono uruchomienie programu oraz analizę sposobu działania mechanizmu sprawdzania hasła.
@@ -116,6 +115,10 @@ Przykład analizy i wywołania programu można pokazać na zrzutach z `resources
 Ćwiczenie pokazało, że w Javie również można zastosować prostą obfuskację danych, która utrudnia szybki odczyt hasła i tekstu. Taki mechanizm zwiększa trudność analizy statycznej, ale nie stanowi realnej ochrony przed osobą, która potrafi przeanalizować bytecode lub śledzić działanie programu w debuggerze.
 
 Najważniejszym wnioskiem jest to, że ukrywanie danych w tablicach i stosowanie prostego XOR-a nie zabezpiecza programu, a jedynie podnosi koszt analizy. Jeśli logika sprawdzania hasła jest dostępna w kodzie, można ją odtworzyć, obejść albo wymusić wykonanie właściwej gałęzi programu.
+
+Poprawnym rozwiazaniem będzie tutaj użycie samego hasła jako klucza deszyfrującego.
+W takim wypadku jednynym problemem będzie odczytanie wartosci bezpośrenio z pamieci urządzenia np. Sprectre / Meltdown lub poprzez inny proces/użytkownika mającego dostęp do tej pamieci. 
+
 
 ## Załączniki
 - Kod źródłowy programu
